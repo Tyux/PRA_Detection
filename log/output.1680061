@@ -1,0 +1,269 @@
+/opt/hpc/software/mpi/hpcx/v2.4.1/gcc-7.3.1/bin/mpirun
+/public/software/apps/DeepLearning/PyTorch/Python3.6.8/bin/python3
+e02r4n10
+mpirun -np 4 --hostfile hostfile-dl-1680061 --bind-to none /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/single_process.sh e02r4n10
+GLOO_SOCKET_IFNAME=ib0 numactl --cpunodebind=1 --membind=1 python3 /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py -j 8 --epochs=26 --batch-size=2 --lr=0.02 --dist-url tcp://e02r4n10:34568 --world-size=4 --rank=1 --output-dir /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/1node_test
+GLOO_SOCKET_IFNAME=ib0 numactl --cpunodebind=0 --membind=0 python3 /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py -j 8 --epochs=26 --batch-size=2 --lr=0.02 --dist-url tcp://e02r4n10:34568 --world-size=4 --rank=0 --output-dir /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/1node_test
+GLOO_SOCKET_IFNAME=ib0 numactl --cpunodebind=2 --membind=2 python3 /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py -j 8 --epochs=26 --batch-size=2 --lr=0.02 --dist-url tcp://e02r4n10:34568 --world-size=4 --rank=2 --output-dir /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/1node_test
+GLOO_SOCKET_IFNAME=ib0 numactl --cpunodebind=3 --membind=3 python3 /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py -j 8 --epochs=26 --batch-size=2 --lr=0.02 --dist-url tcp://e02r4n10:34568 --world-size=4 --rank=3 --output-dir /public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/1node_test
+16
+16
+16
+16
+| distributed init (rank 2): tcp://e02r4n10:34568
+| distributed init (rank 0): tcp://e02r4n10:34568
+| distributed init (rank 3): tcp://e02r4n10:34568
+| distributed init (rank 1): tcp://e02r4n10:34568
+Namespace(aspect_ratio_group_factor=3, batch_size=2, data_path='/public/software/apps/DeepLearning/Data/objects365', dataset='objects365', device='cuda', dist_backend='gloo', dist_url='tcp://e02r4n10:34568', distributed=True, epochs=26, gpu=0, lr=0.02, lr_gamma=0.1, lr_step_size=8, lr_steps=[16, 22], model='fasterrcnn_resnet50_fpn', momentum=0.9, output_dir='/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/1node_test', pretrained=False, print_freq=20, rank=0, resume='', start_epoch=0, test_only=False, weight_decay=0.0001, workers=8, world_size=4)
+Loading data
+loading annotations into memory...
+Done (t=0.12s)
+creating index...
+index created!
+remove 1119 illegal image
+remove 0 empty imgs without annos
+loading annotations into memory...
+Done (t=0.03s)
+creating index...
+index created!
+remove 92 illegal image
+num classes : 66
+Creating data loaders
+Using [0, 0.5, 0.6299605249474366, 0.7937005259840997, 1.0, 1.2599210498948732, 1.5874010519681994, 2.0, inf] as bins for aspect ratio quantization
+Count of instances per bin: [   2   38 1295  136  439 5310  315   34]
+Creating model
+Downloading: "https://download.pytorch.org/models/resnet50-19c8e357.pth" to /public/home/chauncc/.cache/torch/checkpoints/resnet50-19c8e357.pth
+Downloading: "https://download.pytorch.org/models/resnet50-19c8e357.pth" to /public/home/chauncc/.cache/torch/checkpoints/resnet50-19c8e357.pth
+Downloading: "https://download.pytorch.org/models/resnet50-19c8e357.pth" to /public/home/chauncc/.cache/torch/checkpoints/resnet50-19c8e357.pth
+Downloading: "https://download.pytorch.org/models/resnet50-19c8e357.pth" to /public/home/chauncc/.cache/torch/checkpoints/resnet50-19c8e357.pth
+Traceback (most recent call last):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1318, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 964, in send
+    self.connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1392, in connect
+    super().connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 704, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 216, in <module>
+    main(args)
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 109, in main
+    pretrained=args.pretrained)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/faster_rcnn.py", line 332, in fasterrcnn_resnet50_fpn
+    backbone = resnet_fpn_backbone('resnet50', pretrained_backbone)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/backbone_utils.py", line 46, in resnet_fpn_backbone
+    norm_layer=misc_nn_ops.FrozenBatchNorm2d)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 255, in resnet50
+    **kwargs)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 217, in _resnet
+    progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 488, in load_state_dict_from_url
+    download_url_to_file(url, cached_file, hash_prefix, progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 387, in download_url_to_file
+    u = urlopen(url)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1361, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1320, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno -2] Name or service not known>
+Traceback (most recent call last):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1318, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 964, in send
+    self.connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1392, in connect
+    super().connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 704, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 216, in <module>
+    main(args)
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 109, in main
+    pretrained=args.pretrained)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/faster_rcnn.py", line 332, in fasterrcnn_resnet50_fpn
+    backbone = resnet_fpn_backbone('resnet50', pretrained_backbone)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/backbone_utils.py", line 46, in resnet_fpn_backbone
+    norm_layer=misc_nn_ops.FrozenBatchNorm2d)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 255, in resnet50
+    **kwargs)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 217, in _resnet
+    progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 488, in load_state_dict_from_url
+    download_url_to_file(url, cached_file, hash_prefix, progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 387, in download_url_to_file
+    u = urlopen(url)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1361, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1320, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno -2] Name or service not known>
+Traceback (most recent call last):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1318, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 964, in send
+    self.connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1392, in connect
+    super().connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 704, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 216, in <module>
+    main(args)
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 109, in main
+    pretrained=args.pretrained)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/faster_rcnn.py", line 332, in fasterrcnn_resnet50_fpn
+    backbone = resnet_fpn_backbone('resnet50', pretrained_backbone)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/backbone_utils.py", line 46, in resnet_fpn_backbone
+    norm_layer=misc_nn_ops.FrozenBatchNorm2d)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 255, in resnet50
+    **kwargs)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 217, in _resnet
+    progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 488, in load_state_dict_from_url
+    download_url_to_file(url, cached_file, hash_prefix, progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 387, in download_url_to_file
+    u = urlopen(url)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1361, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/pubTraceback (most recent call last):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1318, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1239, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1285, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1234, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 964, in send
+    self.connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 1392, in connect
+    super().connect()
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 704, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 216, in <module>
+    main(args)
+  File "/public/home/chauncc/ai_template_code/object_detection/torch_det_objtiny/train.py", line 109, in main
+    pretrained=args.pretrained)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/faster_rcnn.py", line 332, in fasterrcnn_resnet50_fpn
+    backbone = resnet_fpn_backbone('resnet50', pretrained_backbone)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/detection/backbone_utils.py", line 46, in resnet_fpn_backbone
+    norm_layer=misc_nn_ops.FrozenBatchNorm2d)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 255, in resnet50
+    **kwargs)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torchvision/models/resnet.py", line 217, in _resnet
+    progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 488, in load_state_dict_from_url
+    download_url_to_file(url, cached_file, hash_prefix, progress=progress)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/site-packages/torch/hub.py", line 387, in download_url_to_file
+    u = urlopen(url)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 223, in urlopen
+    return opener.open(url, data, timeout)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 526, in open
+    response = self._open(req, data)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 544, in _open
+    '_open', req)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 504, in _call_chain
+    result = func(*args)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1361, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/public/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1320, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno -2] Name or service not known>
+lic/software/apps/DeepLearning/PyTorch/Python3.6.8/lib/python3.6/urllib/request.py", line 1320, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno -2] Name or service not known>
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[53305,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
